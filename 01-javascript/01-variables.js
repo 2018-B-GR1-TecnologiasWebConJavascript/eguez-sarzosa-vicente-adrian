@@ -8,6 +8,10 @@ var hijos = null;
 var dato;
 var fechaNacimiento = new Date();
 
+var adrian = {};
+
+
+
 
 console.log("edad", typeof edad);
 console.log("edadString", typeof edadString);
@@ -16,7 +20,7 @@ console.log("casado", typeof casado); // boolean
 console.log("hijos", typeof hijos); // object
 console.log("dato valor", dato); // undefined
 console.log("dato tipo", typeof dato); // undefined
-console.log("fechaNacimiento", typeof fechaNacimiento); // undefined
+console.log("fechaNacimiento", typeof fechaNacimiento); // object
 
 
 
