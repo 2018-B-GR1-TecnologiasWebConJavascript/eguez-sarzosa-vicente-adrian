@@ -8,7 +8,9 @@ var hijos = null;
 var dato;
 var fechaNacimiento = new Date();
 
-var adrian = {};
+var adrian = {
+    "nombre":"Adrian"
+}; // object
 
 
 
