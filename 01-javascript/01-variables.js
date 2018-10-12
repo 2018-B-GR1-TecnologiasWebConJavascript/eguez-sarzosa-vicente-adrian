@@ -6,6 +6,8 @@ var sueldo = 1.234;
 var casado = false;
 var hijos = null;
 var dato;
+var fechaNacimiento = new Date();
+
 
 console.log("edad", typeof edad);
 console.log("edadString", typeof edadString);
@@ -13,7 +15,8 @@ console.log("sueldo", typeof sueldo);
 console.log("casado", typeof casado); // boolean
 console.log("hijos", typeof hijos); // object
 console.log("dato valor", dato); // undefined
-console.log("dato tipo", typeof dato, ); // undefined
+console.log("dato tipo", typeof dato); // undefined
+console.log("fechaNacimiento", typeof fechaNacimiento); // undefined
 
 
 
