@@ -9,10 +9,17 @@ var dato;
 var fechaNacimiento = new Date();
 
 var adrian = {
-    "nombre":"Adrian"
+    "nombre": "Vicente",
+    'segundoNombre': 'Adrian',
+    apellidoPaterno: `Eguez`,
+    apellidoMaterno: 'Sarzosa',
+    edad: 29,
+    casado: false,
+    hijo: null,
+    mascotas: {
+        nombre: "Cachetes"
+    }
 }; // object
-
-
 
 
 console.log("edad", typeof edad);
