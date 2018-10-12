@@ -32,4 +32,80 @@ console.log("dato tipo", typeof dato); // undefined
 console.log("fechaNacimiento", typeof fechaNacimiento); // object
 
 
+console.log(adrian.mascotas.nombre);
+console.log(adrian);
+delete adrian.hijo;
+console.log(adrian);
+adrian.hija = {
+    nombre:'????'
+};
 
+console.log(adrian.abuelo);
+
+if(true){
+    console.log("Si") //
+}else{
+    console.log("No")
+}
+
+if(false){
+    console.log("Si")
+}else{
+    console.log("No") //
+}
+
+if(1){ // Truthy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+if(0){ // Falsy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+if(-1){ // Truthy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+if(""){ // Falsy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+if("a"){ // Truthy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+
+if(null){ // Falsy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+if({nombre:'adrian'}){ // Truthy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+if(new Date()){ // Truthy
+    console.log("Si")
+}else{
+    console.log("No")
+}
+
+
+if(undefined){ // Falsy
+    console.log("Si")
+}else{
+    console.log("No")
+}
