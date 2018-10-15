@@ -50,8 +50,33 @@ function calcularResultadoSumarNNumeros(numeros) {
 
 console.log(sumarNNumeros(true, 1, 2, 3));
 
+function saludar(nombre, funcion) {
+    return `Hola ${funcion(nombre)}`;
+}
 
+console.log(saludar("AdRiAn", nombreEnMayusculas));
+console.log(saludar("AdRiAn", nombreEnMinuscula));
+console.log(saludar("AdRiAn", nombreConPuntoAlFinal));
 
+function nombreEnMayusculas(nombre) {
+    return nombre.toUpperCase();
+}
+
+function nombreEnMinuscula(nombre) {
+    return nombre.toLowerCase();
+}
+
+function nombreConPuntoAlFinal(nombre) {
+    return nombre + ".";
+}
+
+var arreglo = [1, 2, 3, 1, 1];
+
+arreglo.findIndex(
+    function (valorDelArreglo, indice, arreglo) {
+        return 2;
+    }
+); // 1
 
 
 

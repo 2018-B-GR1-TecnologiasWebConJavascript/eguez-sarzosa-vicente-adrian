@@ -74,3 +74,43 @@ console.log(arregloTotal);
 // [0,10] Cerrado Esta incluido el 10
 // [0,10[ Abierto Esta excluido el 10
 
+
+var vicente = {
+    nombre: "Vicente",
+    apellido: "Eguez"
+};
+
+var eguez = {
+    sueldo: 1.10
+};
+
+var adrian = {
+    edad: 20,
+    casado: false,
+    hijos: null,
+    mascota: {
+        nombre: "Cachetes"
+    }
+};
+
+var vicenteAdrianEguez = {
+    ...vicente,
+    ...adrian,
+    ...eguez,
+    sueldo:2.01
+};
+
+console.log(vicenteAdrianEguez);
+
+
+
+
+
+
+
+
+
+
+
+
+
