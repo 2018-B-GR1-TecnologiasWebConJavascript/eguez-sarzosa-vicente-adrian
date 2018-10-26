@@ -43,7 +43,7 @@ adrian.hija = {
 console.log(adrian.abuelo);
 
 if(true){
-    console.log("Si") //
+    console.log("Si") //X
 }else{
     console.log("No")
 }
