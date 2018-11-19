@@ -57,15 +57,35 @@ const preguntaUsuarioNuevoNombre = [
 function main() {
     console.log('Empezo');
 
-    // 1) Si existe el archivo, leer, sino crear
+    inicializarBase()
+        .pipe(
+            preguntarOpcionesMenu(),
+            preguntarDatos(),
+            ejecutarAccion(),
+            actualizarBDD()
+        )
+        .subscribe(
+            (respuesta) => {
+                console.log(respuesta);
+            },
+            (error) => {
+                console.log(error);
+            },
+            () => {
+                console.log('complete');
+                main();
+            }
+        );
 
-    // 2) Pregunto que quiere hacer -> Crear
+    // ------- 1) Si existe el archivo, leer, sino crear
 
-    // 3) Preguntar los datos -> Datos nuevo Registro
+    // ------- 2) Pregunto que quiere hacer -> Crear Borrar Actualizar Buscar
 
-    // 4) Accion!
+    // ------- 3) Preguntar los datos -> Datos nuevo Registro
 
-    // 5) Guardar la Base de Datos
+    // ------- 4) Accion!
+
+    // ------- 5) Guardar la Base de Datos
 
 
     /*
@@ -104,28 +124,26 @@ function main() {
     */
 }
 
-function inicializarBase(): Observable<> {
+function inicializarBase() {
 
     const bddLeida$ = rxjs.from(leerBDD());
 
-    bddLeida$
+    return bddLeida$
         .pipe(
             mergeMap(  // Respuesta anterior Observable
-                (respuestaBDD:RespuestaLeerBDD) => {
-                    if(respuestaBDD.bdd){
-                        return rxjs.of(1);
-                    }else{
+                (respuestaBDD: RespuestaLeerBDD) => {
+                    if (respuestaBDD.bdd) {
+                        return rxjs
+                            .of(respuestaBDD);
+                    } else {
                         // crear la base
 
                         return rxjs
-                            .from(crearBDD())
-                            .pipe(
-
-                            )
+                            .from(crearBDD());
                     }
 
                 }
-            )
+            ),
         );
 
     /*
@@ -203,6 +221,92 @@ function crearBDD() {
     );
 }
 
+function guardarBDD(bdd: BaseDeDatos) {
+    return new Promise(
+        (resolve, reject) => {
+            fs.writeFile(
+                'bdd.json',
+                JSON.stringify(bdd),
+                (err) => {
+                    if (err) {
+                        reject({
+                            mensaje: 'Error guardando la BDD',
+                            error: 500
+                        });
+                    } else {
+                        resolve({
+                            mensaje: 'BDD guardada',
+                            bdd
+                        });
+                    }
+                }
+            );
+        }
+    );
+}
+
+function preguntarOpcionesMenu() {
+    return mergeMap(
+        (respuesta: RespuestaLeerBDD) => {
+            return rxjs
+                .from(inquirer.prompt(preguntaMenu))
+                .pipe(
+                    map(
+                        (opcionMenu: OpcionMenu) => {
+                            respuesta.opcionMenu = opcionMenu;
+                            return respuesta;
+                        }
+                    )
+                ).pipe(
+                    mergeMap(
+                        (opcionMenu: OpcionMenu) => {
+                            respuesta.opcionMenu = opcionMenu;
+                            return respuesta;
+                        }
+                    )
+                );
+        }
+    );
+}
+
+function preguntarDatos() {
+    return mergeMap(
+        (respuesta: RespuestaLeerBDD) => {
+            switch (respuesta.opcionMenu.opcionMenu) {
+                case 'Crear':
+                    return rxjs
+                        .from(inquirer.prompt(preguntaUsuario))
+                        .pipe(
+                            map(
+                                (usuario: Usuario) => {
+                                    respuesta.usuario = usuario;
+                                    return respuesta;
+                                }
+                            )
+                        );
+
+            }
+        }
+    );
+}
+
+function actualizarBDD() {
+    return mergeMap(
+        (respuesta: RespuestaLeerBDD) => {
+            return rxjs.from(guardarBDD(respuesta.bdd));
+        }
+    );
+}
+
+
+function ejecutarAccion() {
+    return map(
+        (respuesta: RespuestaLeerBDD) => {
+            respuesta.bdd.usuarios.push(respuesta.usuario);
+            return respuesta;
+        }
+    );
+}
 
 function anadirUsuario(usuario) {
     return new Promise(
@@ -300,9 +404,11 @@ function buscarUsuarioPorNombre(nombre) {
 main();
 
 
-interface RespuestaLeerBDD{
-    mensaje:string;
-    bdd:BaseDeDatos;
+interface RespuestaLeerBDD {
+    mensaje: string;
+    bdd?: BaseDeDatos;
+    opcionMenu?: OpcionMenu;
+    usuario?: Usuario;
 }
 
 export interface BaseDeDatos {
@@ -321,7 +427,9 @@ interface Mascota {
     idUsuario: number;
 }
 
-
+interface OpcionMenu {
+    opcionMenu: 'Crear' | 'Borrar' | 'Actualizar' | 'Buscar';
+}
 
 
 
