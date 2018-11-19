@@ -1,7 +1,7 @@
-declare var Promise;
-
 const inquirer = require('inquirer');
 const fs = require('fs');
+const rxjs = require('rxjs');
+const mergeMap = require('rxjs/operators').mergeMap;
 
 const preguntaMenu = {
     type: 'list',
@@ -45,8 +45,22 @@ const preguntaUsuarioNuevoNombre = [
     }
 ];
 
-async function main() {
+
+function main() {
     console.log('Empezo');
+
+    // 1) Si existe el archivo, leer, sino crear
+
+    // 2) Pregunto que quiere hacer -> Crear
+
+    // 3) Preguntar los datos -> Datos nuevo Registro
+
+    // 4) Accion!
+
+    // 5) Guardar la Base de Datos
+
+
+    /*
     try {
         await inicializarBase();
         const respuesta = await inquirer.prompt(preguntaMenu);
@@ -79,11 +93,24 @@ async function main() {
     } catch (e) {
         console.log('Hubo un error');
     }
+    */
 }
 
-function inicializarBase() {
+function inicializarBase():Observable<> {
+
+    const bddLeida$ = rxjs.from(leerBDD());
+
+    bddLeida$
+        .pipe(
+
+        )
+
+    /*
     return new Promise(
         (resolve, reject) => {
+
+            // CALLBACK HELL !!!
+
             fs.readFile('bdd.json', 'utf-8',
                 (err, contenido) => {
                     if (err) {
@@ -101,7 +128,58 @@ function inicializarBase() {
                 });
         }
     );
+    */
 }
+
+function leerBDD() {
+    return new Promise(
+        (resolve) => {
+            fs.readFile(
+                'bdd.json',
+                'utf-8',
+                (error, contenidoArchivo) => {
+                    if (error) {
+                        resolve({
+                            mensaje: 'No existe la Base de Datos',
+                            bdd: null
+                        });
+                    } else {
+                        resolve({
+                            mensaje: 'Base de datos leida',
+                            bdd: JSON.parse(contenidoArchivo)
+                        });
+                    }
+                }
+            );
+        }
+    );
+}
+
+function crearBDD() {
+    const contenido = '{"usuarios":[],"mascotas":[]}';
+    return new Promise(
+        (resolve, reject) => {
+            fs.writeFile(
+                'bdd.json',
+                contenido,
+                (error) => {
+                    if (error) {
+                        reject({
+                            mensaje: 'Error creando bdd',
+                            error: 500
+                        });
+                    } else {
+                        resolve({
+                            mensaje: 'BDD creada',
+                            bdd: JSON.parse(contenido)
+                        });
+                    }
+                }
+            );
+        }
+    );
+}
+
 
 function anadirUsuario(usuario) {
     return new Promise(
