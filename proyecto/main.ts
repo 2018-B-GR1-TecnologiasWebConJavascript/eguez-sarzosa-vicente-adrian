@@ -2,7 +2,15 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const rxjs = require('rxjs');
 const mergeMap = require('rxjs/operators').mergeMap;
+const map = require('rxjs/operators').map;
 
+/*
+map(  // MODIFICA ALTERA ARREGLO -> NUEVO ARREGLO
+    ()=>{
+        return {}
+    }
+)
+*/
 const preguntaMenu = {
     type: 'list',
     name: 'opcionMenu',
@@ -96,14 +104,29 @@ function main() {
     */
 }
 
-function inicializarBase():Observable<> {
+function inicializarBase(): Observable<> {
 
     const bddLeida$ = rxjs.from(leerBDD());
 
     bddLeida$
         .pipe(
+            mergeMap(  // Respuesta anterior Observable
+                (respuestaBDD:RespuestaLeerBDD) => {
+                    if(respuestaBDD.bdd){
+                        return rxjs.of(1);
+                    }else{
+                        // crear la base
 
-        )
+                        return rxjs
+                            .from(crearBDD())
+                            .pipe(
+
+                            )
+                    }
+
+                }
+            )
+        );
 
     /*
     return new Promise(
@@ -275,3 +298,40 @@ function buscarUsuarioPorNombre(nombre) {
 }
 
 main();
+
+
+interface RespuestaLeerBDD{
+    mensaje:string;
+    bdd:BaseDeDatos;
+}
+
+export interface BaseDeDatos {
+    usuarios: Usuario[];
+    mascotas: Mascota[];
+}
+
+interface Usuario {
+    id: number;
+    nombre: string;
+}
+
+interface Mascota {
+    id: number;
+    nombre: string;
+    idUsuario: number;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
