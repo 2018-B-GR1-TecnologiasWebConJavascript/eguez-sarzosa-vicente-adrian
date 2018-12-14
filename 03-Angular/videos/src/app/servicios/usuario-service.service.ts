@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class UsuarioServiceService {
 
-  usuarios: Usuario[] = [
+  usuarios: UsuarioInterface[] = [
     {
       id: 1,
       nombre: 'Adrian'
@@ -21,7 +21,7 @@ export class UsuarioServiceService {
   constructor() {
   }
 
-  crear(nuevoUsuario: Usuario): Usuario {
+  crear(nuevoUsuario: UsuarioInterface): UsuarioInterface {
 
     nuevoUsuario.id = this.registroActual;
     this.usuarios.push(nuevoUsuario);
@@ -30,7 +30,7 @@ export class UsuarioServiceService {
     return nuevoUsuario;
   }
 
-  eliminar(id: number) {
+  eliminar(id: number): UsuarioInterface {
     const indiceUsuario = this.usuarios
       .findIndex(
         (usuario) => {
@@ -47,7 +47,7 @@ export class UsuarioServiceService {
     return usuarioBorrado;
   }
 
-  actualizar(id: number, usuarioActualizado: Usuario) {
+  actualizar(id: number, usuarioActualizado: UsuarioInterface) {
 
     const indiceUsuario = this.usuarios
       .findIndex(
@@ -61,9 +61,15 @@ export class UsuarioServiceService {
     return usuarioActualizado;
   }
 
+  buscarPorId(id: number): UsuarioInterface {
+    return this.usuarios
+      .find((usuario) => usuario.id === id);
+  }
+
+
 }
 
-export interface Usuario {
+export interface UsuarioInterface {
   nombre?: string;
   id?: number;
 }
