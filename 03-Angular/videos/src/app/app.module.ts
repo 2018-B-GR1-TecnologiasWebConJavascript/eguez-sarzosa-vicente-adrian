@@ -11,6 +11,7 @@ import { RutaMenuComponent } from './rutas/ruta-menu/ruta-menu.component';
 import { RutaGestionUsuariosComponent } from './rutas/ruta-gestion-usuarios/ruta-gestion-usuarios.component';
 import { RutaGestionProductosComponent } from './rutas/ruta-gestion-productos/ruta-gestion-productos.component';
 import {UsuarioServiceService} from './servicios/usuario-service.service';
+import { RutaVerDetalleUsuarioComponent } from './rutas/ruta-ver-detalle-usuario/ruta-ver-detalle-usuario.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {UsuarioServiceService} from './servicios/usuario-service.service';
     RutaLoginComponent,
     RutaMenuComponent,
     RutaGestionUsuariosComponent,
-    RutaGestionProductosComponent
+    RutaGestionProductosComponent,
+    RutaVerDetalleUsuarioComponent
   ],  // Components
   imports: [
     BrowserModule,
