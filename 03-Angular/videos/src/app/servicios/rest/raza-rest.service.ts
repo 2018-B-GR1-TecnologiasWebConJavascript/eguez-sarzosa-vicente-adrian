@@ -51,6 +51,17 @@ export class RazaRestService {
       .pipe(map(r => <Raza> r)); // Castear
   }
 
+  updateOneById(raza: Raza) {
+
+    const url = environment.url + this.nombreModelo
+      + '/' + raza.id;
+
+    return this._httpClient
+      .put(url, raza)
+      .pipe(map(r => <Raza> r)); // Castear
+
+  }
+
 
 }
 

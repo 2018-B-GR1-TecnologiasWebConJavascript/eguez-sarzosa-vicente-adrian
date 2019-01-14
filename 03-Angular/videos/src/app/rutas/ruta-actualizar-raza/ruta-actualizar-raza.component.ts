@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RazaRestService} from '../../servicios/rest/raza-rest.service';
 import {Raza} from '../../interfaces/raza';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-ruta-actualizar-raza',
@@ -10,11 +11,12 @@ import {Raza} from '../../interfaces/raza';
 })
 export class RutaActualizarRazaComponent implements OnInit {
 
-  razaAActualizar: Raza;
+  razaAActualizar: Raza; //undefined
 
   constructor(
     private readonly _activatedRoute: ActivatedRoute,
-    private readonly _razaRestService: RazaRestService
+    private readonly _razaRestService: RazaRestService,
+    private readonly _router: Router
   ) {
   }
 
@@ -57,6 +59,32 @@ export class RutaActualizarRazaComponent implements OnInit {
         }
       );
   }
+
+  actualizarRaza(formulario: NgForm) {
+
+    const razaActualizada$ = this._razaRestService
+      .updateOneById(this.razaAActualizar);
+
+    razaActualizada$
+      .subscribe(
+        (razaActualizada: Raza) => {
+
+          const url = [
+            'menu',
+            '/gestion-usuarios'
+          ];
+
+          alert('Raza actualizada ' + razaActualizada.nombre);
+
+          this._router.navigate(url);
+        },
+        (error) => {
+          console.error('Error', error);
+        }
+      );
+
+  }
+
 
 }
 
