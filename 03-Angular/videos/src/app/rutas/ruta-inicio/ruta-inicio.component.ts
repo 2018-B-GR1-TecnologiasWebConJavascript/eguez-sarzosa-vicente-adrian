@@ -12,15 +12,27 @@ export class RutaInicioComponent implements OnInit {
       anio: 2018,
       nombreImagen: '01.jpeg',
       nombrePelicula: 'Avengers'
-    }
-  ];
-
+    },
+    {
+      anio: 2016,
+      nombreImagen: '02.jpeg',
+      nombrePelicula: 'Infantil'
+    },
+    {
+      anio: 2008,
+      nombreImagen: '03.jpeg',
+      nombrePelicula: 'Antigua'
+    },
+    {
+      anio: 2001,
+      nombreImagen: '04.jpeg',
+      nombrePelicula: 'Toy Story'
+    },
+];
   constructor() {
   }
-
   ngOnInit() {
   }
-
 }
 
 export interface Imagenes {
