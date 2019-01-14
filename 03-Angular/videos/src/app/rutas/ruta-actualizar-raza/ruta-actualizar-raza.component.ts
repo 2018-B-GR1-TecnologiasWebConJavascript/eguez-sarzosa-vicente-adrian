@@ -70,8 +70,8 @@ export class RutaActualizarRazaComponent implements OnInit {
         (razaActualizada: Raza) => {
 
           const url = [
-            'menu',
-            '/gestion-usuarios'
+            '/menu',
+            'gestion-usuarios'
           ];
 
           alert('Raza actualizada ' + razaActualizada.nombre);
