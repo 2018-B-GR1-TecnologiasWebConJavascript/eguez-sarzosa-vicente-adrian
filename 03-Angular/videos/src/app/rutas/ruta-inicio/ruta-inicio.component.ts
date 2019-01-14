@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-ruta-inicio',
@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutaInicioComponent implements OnInit {
 
-  constructor() { }
+  imagenes: Imagenes[] = [
+    {
+      anio: 2018,
+      nombreImagen: '01.jpeg',
+      nombrePelicula: 'Avengers'
+    }
+  ];
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
 }
+
+export interface Imagenes {
+  nombreImagen: string;
+  nombrePelicula: string;
+  anio: number;
+}
+
+
+
+
+
+
+
