@@ -28,10 +28,8 @@ export class RutaCrearRazaComponent implements OnInit {
     // Validar
 
     if (this.nombreContieneA(this.raza.nombre.toString())) {
-
       const crearRaza$ = this._razaRestService
         .create(<string> this.raza.nombre);
-      
       crearRaza$
         .subscribe(
           (raza: Raza) => {
@@ -42,14 +40,9 @@ export class RutaCrearRazaComponent implements OnInit {
             console.error('Error: ', error);
           }
         );
-
     } else {
-
       alert('ERROR, No contiene una letra A');
-
     }
-
-
   }
 
   nombreContieneA(nombre: string): boolean {
