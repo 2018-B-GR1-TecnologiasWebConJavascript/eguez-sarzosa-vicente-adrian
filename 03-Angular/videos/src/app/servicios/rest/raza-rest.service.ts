@@ -42,6 +42,15 @@ export class RazaRestService {
       .pipe(map(r => <Raza> r)); // Castear
   }
 
+  findOneById(id: number | string): Observable<Raza> {
+    const url = environment.url + this.nombreModelo
+      + '/' + id;
+
+    return this._httpClient
+      .get(url)
+      .pipe(map(r => <Raza> r)); // Castear
+  }
+
 
 }
 
