@@ -19,6 +19,25 @@
     >
   </div>
 
+  <div>
+    <label for="username">Usuario</label>
+    <input id="username"
+           name="username"
+           type="text"
+           [(ngModel)])="username"
+    >
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input id="password"
+           name="password"
+           type="password"
+           [(ngModel)])="password"
+    >
+
+    <button>Login</button>
+  </div>
+
   <button [disabled]="formularioActualizarRaza.invalid">
     {{nombreBoton}}
   </button>

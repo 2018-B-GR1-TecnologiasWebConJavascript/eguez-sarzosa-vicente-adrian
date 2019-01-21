@@ -17,6 +17,8 @@ export class FormularioRazaComponent implements OnInit {
   formularioValido = new EventEmitter();
 
   nombreRaza: string;
+  username: string;
+  password: string;
 
   constructor() {
   }
@@ -25,9 +27,11 @@ export class FormularioRazaComponent implements OnInit {
     this.nombreRaza = this.nombre;
   }
 
-  emitirFormularioValido(){
+  emitirFormularioValido() {
     const objetoRaza = {
-      nombre:this.nombreRaza
+      nombre: this.nombreRaza,
+      username: this.username,
+      password: this.password
     };
     this.formularioValido.emit(objetoRaza);
   }
