@@ -24,7 +24,7 @@ import {AuthService} from './servicios/rest/auth.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-import {InputTextModule, MessageModule, MessagesModule} from 'primeng/primeng';
+import {CardModule, ChartModule, InputTextModule, MessageModule, MessagesModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,9 @@ import {InputTextModule, MessageModule, MessagesModule} from 'primeng/primeng';
     TableModule,
     InputTextModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    CardModule,
+    ChartModule
   ],  // Modulos
   providers: [
     UsuarioServiceService,
