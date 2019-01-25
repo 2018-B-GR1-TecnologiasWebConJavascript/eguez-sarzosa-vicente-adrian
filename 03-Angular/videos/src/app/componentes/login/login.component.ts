@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     respuestaLogin$
       .subscribe(
         (raza) => {
+          this._authService.usuario = raza;
           console.log(raza);
         },
         (error) => {

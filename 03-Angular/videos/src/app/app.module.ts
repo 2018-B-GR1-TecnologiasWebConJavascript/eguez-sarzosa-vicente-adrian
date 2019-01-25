@@ -21,6 +21,10 @@ import {ImagenPeliculaComponent} from './componentes/imagen-pelicula/imagen-peli
 import {FormularioRazaComponent} from './componentes/formulario-raza/formulario-raza.component';
 import {LoginComponent} from './componentes/login/login.component';
 import {AuthService} from './servicios/rest/auth.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/button';
+import {TableModule} from 'primeng/table';
+import {InputTextModule, MessageModule, MessagesModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -40,10 +44,16 @@ import {AuthService} from './servicios/rest/auth.service';
     LoginComponent
   ],  // Components
   imports: [
-    BrowserModule,
+    BrowserModule, // -> NGIF NGFOR NGCLASS ....
     AppRoutingModule,
     HttpClientModule,  // Acceso a un servicio HttpClient
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, // Animaciones
+    ButtonModule,
+    TableModule,
+    InputTextModule,
+    MessagesModule,
+    MessageModule
   ],  // Modulos
   providers: [
     UsuarioServiceService,
