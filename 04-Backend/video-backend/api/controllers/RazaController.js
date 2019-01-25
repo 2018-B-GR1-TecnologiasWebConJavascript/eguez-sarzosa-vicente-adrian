@@ -41,12 +41,12 @@ module.exports = {
       password: parametros.password,
     });
 
-    console.log(usuarioLogeado);
+    const error = usuarioLogeado.length === 0;
 
-    if(usuarioLogeado){
-      return res.ok(usuarioLogeado);
-    }else{
-      return res.badRequest({mensaje:'Usuario Invalido'});
+    if (!error) {
+      return res.ok(usuarioLogeado[0]);
+    } else {
+      return res.badRequest({mensaje: 'Usuario Invalido'});
     }
 
   }
