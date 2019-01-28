@@ -21,6 +21,9 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
+  'POST /Board/saludo': 'BoardController.saludo',
+
+
 
   /***************************************************************************
   *                                                                          *

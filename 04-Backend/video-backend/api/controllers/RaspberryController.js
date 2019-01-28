@@ -19,11 +19,19 @@ module.exports = {
     };
 
     try {
-      const respuestaRaspberry = await axios.post(url, saludo);
 
-      return res.ok(respuestaRaspberry);
+      
+      const respuestaRaspberry = await axios({
+        method: 'post',
+        url: url.toString(),
+        data: saludo
+      });
+
+      return res.ok(respuestaRaspberry.data);
 
     } catch (e) {
+
+      console.error('Error', e);
 
       return res.serverError({
         error: 500,
