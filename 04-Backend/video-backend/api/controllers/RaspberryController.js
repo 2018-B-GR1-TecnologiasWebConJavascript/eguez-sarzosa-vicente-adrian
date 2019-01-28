@@ -20,7 +20,7 @@ module.exports = {
 
     try {
 
-      
+
       const respuestaRaspberry = await axios({
         method: 'post',
         url: url.toString(),

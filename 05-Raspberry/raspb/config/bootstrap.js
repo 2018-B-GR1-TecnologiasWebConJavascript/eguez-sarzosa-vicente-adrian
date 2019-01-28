@@ -9,22 +9,38 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function() {
+const axios = require('axios');
+module.exports.bootstrap = async function () {
 
-  // By convention, this is a good place to set up fake data during development.
-  //
-  // For example:
-  // ```
-  // // Set up fake development data (or if we already have some, avast)
-  // if (await User.count() > 0) {
-  //   return;
-  // }
-  //
-  // await User.createEach([
-  //   { emailAddress: 'ry@example.com', fullName: 'Ryan Dahl', },
-  //   { emailAddress: 'rachael@example.com', fullName: 'Rachael Shaw', },
-  //   // etc.
-  // ]);
-  // ```
+  emitirTemperatura();
 
 };
+
+function emitirTemperatura() {
+  setInterval(
+    async () => {
+      const temperatura = new Date().getSeconds();
+      // Guardar la temperatura en la BDD
+      // REST -> POST
+      if (temperatura > 5) {
+        const url = 'http://localhost:1337/Temperatura';
+        try {
+          const respuesta = await axios({
+            method: 'post',
+            url: url,
+            data: {
+              medicion: temperatura
+            }
+          });
+          console.log(respuesta.data);
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        console.info('Temperatura menor a 5');
+      }
+
+    },
+    2000
+  );
+}
